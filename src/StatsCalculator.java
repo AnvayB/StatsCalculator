@@ -15,13 +15,13 @@ public class StatsCalculator {
 
 		String response = scan.next();
 
-		if (response.equals("B")) {
+		if (response.equals("B") || response.equals("s")) {
 			// mean, median, mode, range
 		}
 
 		// different stats functions code
 
-		if (response.equals("S")) {
+		if (response.equals("S") || response.equals("s")) {
 			double p, q, z, w;
 			int n;
 

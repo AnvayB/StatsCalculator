@@ -8,6 +8,7 @@ public class StatsCalculator {
 
 	public static void main(String args[]) {
 
+		@SuppressWarnings("resource")
 		Scanner scan = new Scanner(System.in);
 		sop("Welcome to the Stats Calculator");
 		sop("Please enter the appropriate letter for the type of calculation you want to do:");
@@ -15,57 +16,85 @@ public class StatsCalculator {
 
 		String response = scan.next();
 
-		if (response.equals("B") || response.equals("s")) {
+		if (response.equals("B") || response.equals("b")) {
 			// mean, median, mode, range
-		}
+			double sum = 0;
+			int count = 0;
+			try {
 
-		// different stats functions code
+				System.out.println("Enter numbers. Type 'Q' or 'q' to quit");
 
-		if (response.equals("S") || response.equals("s")) {
-			double p, q, z, w;
-			int n;
+				while (scan.hasNext()) {
+					if (scan.hasNextDouble()) {
+						sum = sum + scan.nextDouble();
+						count++;
+						
+					} else {
+						String input = scan.next();
+						if (input.equalsIgnoreCase("Q")) {
+							double avg = sum/count;
+							System.out.println("The mean is " + avg);
+							break;
 
-			sop("Enter p value: ");
-			p = scan.nextDouble();
+						} else {
+							System.out.println(
+									"You did not enter a valid value. Please enter a number or \"Q\" to quit.");
+						} 
+					}
 
-			q = 1 - p;
+				}
 
-			sop("Enter z value: ");
-			z = scan.nextDouble();
+			} catch (Exception e) {
+				System.out.println("Exiting Program.");
+			}
 
-			sop("Enter width: ");
-			w = scan.nextDouble();
+			// different stats functions code
 
-			double nPlus;
+			if (response.equals("S") || response.equals("s")) {
+				double p, q, z, w;
+				int n;
 
-			nPlus = (2 * Math.pow(z, 2) * p * q - Math.pow(z, 2) * Math.pow(w, 2)
-					+ Math.sqrt(
-							4 * Math.pow(z, 4) * p * q * (p * q - Math.pow(w, 2)) + Math.pow(w, 2) * Math.pow(z, 4)))
-					/ Math.pow(w, 2);
+				sop("Enter p value: ");
+				p = scan.nextDouble();
+
+				q = 1 - p;
+
+				sop("Enter z value: ");
+				z = scan.nextDouble();
+
+				sop("Enter width: ");
+				w = scan.nextDouble();
+
+				double nPlus;
+
+				nPlus = (2 * Math.pow(z, 2) * p * q - Math.pow(z, 2) * Math.pow(w, 2) + Math
+						.sqrt(4 * Math.pow(z, 4) * p * q * (p * q - Math.pow(w, 2)) + Math.pow(w, 2) * Math.pow(z, 4)))
+						/ Math.pow(w, 2);
 
 //			nMinus = (2*Math.pow(z, 2)*p*q - Math.pow(z, 2)*Math.pow(w,2)- Math.sqrt(4*Math.pow(z, 4)*p*q*(p*q-Math.pow(w, 2))
 //					+Math.pow(w, 2)*Math.pow(z, 4))) / Math.pow(w, 2);
 
-			sop("The necessary sample size is " + nPlus);
+				sop("The necessary sample size is " + nPlus);
 
-			double percent = p * 100;
-			percent = Math.round(percent * 10.00) / 10.00;
+				double percent = p * 100;
+				percent = Math.round(percent * 10.00) / 10.00;
 
-			sop("Enter size: ");
-			n = scan.nextInt();
+				sop("Enter size: ");
+				n = scan.nextInt();
 
-			sop("\nIf a " + percent + " % of " + n + " individuals have done something,");
+				sop("\nIf a " + percent + " % of " + n + " individuals have done something,");
 
-			double ciMinus = p - z * Math.sqrt((p * q) / n);
-			double ciPlus = p + z * Math.sqrt((p * q) / n);
+				double ciMinus = p - z * Math.sqrt((p * q) / n);
+				double ciPlus = p + z * Math.sqrt((p * q) / n);
 
-			// this rounds the CI values to 4 decimal places
-			ciMinus = Math.round(ciMinus * 10000.00) / 10000.00;
-			ciPlus = Math.round(ciPlus * 10000.00) / 10000.00;
+				// this rounds the CI values to 4 decimal places
+				ciMinus = Math.round(ciMinus * 10000.00) / 10000.00;
+				ciPlus = Math.round(ciPlus * 10000.00) / 10000.00;
 
-			sop("\tthe confidence interval is (" + ciMinus + "," + ciPlus + ")");
+				sop("\tthe confidence interval is (" + ciMinus + "," + ciPlus + ")");
+
+			}
 
 		}
-
 	}
 }

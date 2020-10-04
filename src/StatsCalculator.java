@@ -17,35 +17,66 @@ public class StatsCalculator {
 		String response = scan.next();
 
 		if (response.equals("B") || response.equals("b")) {
-			// mean, median, mode, range
-			double sum = 0;
-			int count = 0;
-			try {
+			sop("Which measure of data you want to calculate: mean, median, mode, range");
+			String answer = scan.next();
 
-				System.out.println("Enter numbers. Type 'Q' or 'q' to quit");
+			// finding mean
+			if (answer.equals("mean")) {
+				double sum = 0;
+				int count = 0;
 
-				while (scan.hasNext()) {
-					if (scan.hasNextDouble()) {
-						sum = sum + scan.nextDouble();
-						count++;
-						
-					} else {
-						String input = scan.next();
-						if (input.equalsIgnoreCase("Q")) {
-							double avg = sum/count;
-							System.out.println("The mean is " + avg);
-							break;
+				// keep entering values until user presses q
+				try {
+					System.out.println("Enter the numbers. Type 'q' to quit");
 
+					while (scan.hasNext()) {
+						if (scan.hasNextDouble()) {
+							sum = sum + scan.nextDouble();
+							count++;
 						} else {
-							System.out.println(
-									"You did not enter a valid value. Please enter a number or \"Q\" to quit.");
-						} 
+							String input = scan.next();
+							if (input.equalsIgnoreCase("q")) {
+								double mean = sum / count;
+
+								System.out.println("The mean is " + mean);
+								break;
+
+							} else {
+								System.out.println("Your input is invalid. Please enter a number or press q to quit");
+							}
+						}
 					}
 
+				} catch (Exception e) {
+					System.out.println("Exiting Program.");
 				}
+			}
 
-			} catch (Exception e) {
-				System.out.println("Exiting Program.");
+			// finding median
+			if (answer.equals("median")) {
+				System.out.println("How many numbers do you want to find the median of? ");
+				int size = scan.nextInt();
+				int[] arr = new int[size];
+				System.out.println("Enter the numbers: ");
+				for (int i = 0; i < size; i++) {
+					arr[i] = scan.nextInt();
+				}
+				System.out.println("Original entry: " + Arrays.toString(arr));
+
+				Arrays.sort(arr);
+				sop("Sorted entry: " + Arrays.toString(arr));
+				
+				int n = arr.length;
+				double median = 0;
+
+				// check if array size is even
+				if (n % 2 != 0)
+					median = (double) arr[n / 2];
+
+				// if array size is odd
+				median = (double) (arr[(n - 1) / 2] + arr[n / 2]) / 2.0;
+
+				System.out.println("The median is " + median);
 			}
 
 			// different stats functions code

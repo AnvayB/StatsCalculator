@@ -54,14 +54,14 @@ public class StatsCalculator {
 
 			// finding median
 			if (answer.equals("median")) {
-				System.out.println("How many numbers do you want to find the median of? ");
+				sop("How many numbers do you want to find the median of? ");
 				int size = scan.nextInt();
 				int[] arr = new int[size];
-				System.out.println("Enter the numbers: ");
+				sop("Enter the numbers: ");
 				for (int i = 0; i < size; i++) {
 					arr[i] = scan.nextInt();
 				}
-				System.out.println("Original entry: " + Arrays.toString(arr));
+				sop("Original entry: " + Arrays.toString(arr));
 
 				Arrays.sort(arr);
 				sop("Sorted entry: " + Arrays.toString(arr));
@@ -76,11 +76,68 @@ public class StatsCalculator {
 				// if array size is odd
 				median = (double) (arr[(n - 1) / 2] + arr[n / 2]) / 2.0;
 
-				System.out.println("The median is " + median);
+				sop("The median is " + median);
+			}
+			
+			//finding mode
+			if (answer.equals("mode")) {
+				sop("How many numbers do you want to find the mode of? ");
+				int size = scan.nextInt();
+				int[] arr = new int[size];
+				sop("Enter the numbers: ");
+				for (int i = 0; i < size; i++) {
+					arr[i] = scan.nextInt();
+				}
+				sop("Original entry: " + Arrays.toString(arr));
+
+				Arrays.sort(arr);
+				sop("Sorted entry: " + Arrays.toString(arr));
+				int maxValue = 0, maxCount = 0, i, j;
+				int n = arr.length;
+
+				for (i = 0; i < n; ++i) {
+					int count = 0;
+					for (j = 0; j < n; ++j) {
+						if (arr[j] == arr[i])
+							++count;
+					}
+
+					if (count > maxCount) {
+						maxCount = count;
+						maxValue = arr[i];
+					}
+				}
+
+				System.out.println("The mode is " + maxValue);
 			}
 
+			
+			
+			//finding range
+			if (answer.equals("range")) {
+				
+			}
+			
+			
+			
+			
+			
+			
+			
+			
+			
 			// different stats functions code
 
+		
+			
+			
+			
+			
+			
+			
+			
+			
+			
 			if (response.equals("S") || response.equals("s")) {
 				double p, q, z, w;
 				int n;

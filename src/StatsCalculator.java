@@ -35,7 +35,9 @@ public class StatsCalculator {
 		Scanner scan = new Scanner(System.in);
 		sop("Welcome to the Stats Calculator");
 		sop("Please enter the appropriate letter for the type of calculation you want to do:");
-		sop(" B - Basic Stats," + "\n P - Permutations and Combinations," + "\n S - Sample Size");
+		sop(" B - Basic Stats (mean, median, mode, range)," 
+				+ "\n P - Permutations and Combinations," 
+				+ "\n S - Sample Size and Confidence Interval");
 
 		String response = scan.next();
 
@@ -61,7 +63,7 @@ public class StatsCalculator {
 							if (input.equalsIgnoreCase("q")) {
 								double mean = sum / count;
 
-								System.out.println("The mean is " + mean);
+								System.out.println("The mean of " + count + " numbers is " + mean);
 								break;
 
 							} else {

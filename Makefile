@@ -9,7 +9,7 @@ trials:
 	git push origin trials
 
 main:
-	git checkout main
+	git checkout master
 	git branch
 	git pull
 	git checkout trials
